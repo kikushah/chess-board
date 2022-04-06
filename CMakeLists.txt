@@ -1,0 +1,27 @@
+cmake_minimum_required(VERSION 3.5)
+
+project(ChessBoard)
+
+set(CMAKE_DISABLE_SOURCE_CHANGES ON)
+set(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
+set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/build)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+set(CMAKE_BUILD_TYPE Debug)
+
+set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/build)
+
+set(PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
+
+set(PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/../Board/include)
+include_directories("${PROJECT_INCLUDE_DIR}")
+
+set(PROJECT_SRCS 
+${PROJECT_SOURCE_DIR}/main.cc
+${PROJECT_SOURCE_DIR}/Board/src/board.cc
+${PROJECT_SOURCE_DIR}/Board/src/cell.cc)
+
+add_executable(ChessBoard ${PROJECT_SRCS})
