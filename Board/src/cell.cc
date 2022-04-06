@@ -1,20 +1,22 @@
 #include "../include/cell.h"
 #include "../include/board.h"
+
 using namespace std;
+using namespace ChessBoard;
 
 Cell::Cell(char x, char y, Board* board){
 
-    this->_x = x;
-    this->_y = y;
-    this->_name += x;
-    this->_name += y;
+    this->x = x;
+    this->y = y;
+    this->name += x;
+    this->name += y;
 
-    this->_board = board;
-    this->_board->cells[this->_name] = this;
+    this->board = board;
+    this->board->cells[this->name] = this;
 
     this->FindNeighbours();
 
-    cout << "Created cell: " << this->_name << " with " << this->_num_of_neighbours << " neighbours" << endl;
+    // cout << "Created cell: " << this->_name << " with " << this->_num_of_neighbours << " neighbours" << endl;
 }
 
 void Cell::FindNeighbours(){
@@ -24,45 +26,45 @@ void Cell::FindNeighbours(){
         switch (directions)
         {
             case 0: //right
-            newx = this->_x + 1;
-            newy = this->_y;
+            newx = this->x + 1;
+            newy = this->y;
             break;
             case 1: //right up
-            newx = this->_x + 1;
-            newy = this->_y + 1;
+            newx = this->x + 1;
+            newy = this->y + 1;
             break;
             case 2: // up
-            newx = this->_x;
-            newy = this->_y + 1;
+            newx = this->x;
+            newy = this->y + 1;
             break;
             case 3: // left up
-            newx = this->_x - 1;
-            newy = this->_y + 1;
+            newx = this->x - 1;
+            newy = this->y + 1;
             break;
             case 4: // left
-            newx = this->_x - 1;
-            newy = this->_y;
+            newx = this->x - 1;
+            newy = this->y;
             break;
             case 5: // left down
-            newx = this->_x - 1;
-            newy = this->_y - 1;
+            newx = this->x - 1;
+            newy = this->y - 1;
             break;
             case 6: // down
-            newx = this->_x;
-            newy = this->_y - 1;
+            newx = this->x;
+            newy = this->y - 1;
             break;
             case 7: // right down
-            newx = this->_x + 1;
-            newy = this->_y - 1;           
+            newx = this->x + 1;
+            newy = this->y - 1;           
 
         }
 
         if(newx >= 'A' && newx <= 'H' && newy >= '1' && newy <= '8'){
-            this->_board->CreateOrGetCell(newx, newy);
+            this->neighbours[directions] = this->board->CreateOrGetCell(newx, newy);
             this->_num_of_neighbours++;
         }
         else{
-            this->neighbours[directions] = nullptr;
+            // this->neighbours[directions] = nullptr;
         }
         
          
@@ -70,7 +72,7 @@ void Cell::FindNeighbours(){
     }
 
     
-    if(this->_x == 'A'){
+    if(this->x == 'A'){
 
     }
 }

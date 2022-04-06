@@ -1,13 +1,16 @@
 #include "../include/board.h"
 
-Board::Board(){
+using namespace ChessBoard;
+
+Board::Board(char x, char y){
 
     // This creates a board of all cells like a graph and inserts each cell into the map
     // As every new cell created tries to find its neighbours or creates them
-    this->CreateOrGetCell('A', '1');
+    // The Starting cell can be any of the 64 cells
+    this->CreateOrGetCell(x, y);
 }
 
-void Board::CreateOrGetCell(char x, char y){
+Cell* Board::CreateOrGetCell(char x, char y){
     string name;
     name += x;
     name += y;
@@ -22,4 +25,6 @@ void Board::CreateOrGetCell(char x, char y){
     else{
         cell = it->second;
     }
+
+    return cell;
 }

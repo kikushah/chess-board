@@ -8,13 +8,19 @@
 #include "../include/cell.h"
 
 using namespace std;
-class Cell;
-class Board {
-    public:
-        unordered_map<string, Cell*> cells;
 
-        Board();
-        void CreateOrGetCell(char x, char y);
-};
+namespace ChessBoard{
+
+    class Cell;
+    class Board {
+
+        public:
+            unordered_map<string, Cell*> cells;
+            
+            Board(char x = 'A', char y = '1');
+            Cell* CreateOrGetCell(char x, char y);
+    };
+}
+
 
 #endif
