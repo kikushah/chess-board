@@ -5,10 +5,10 @@ using namespace std;
 using namespace ChessBoard;
 
 string Piece::FindAllAllowedCells(string initial_position){
-
     
     this->initial_position = initial_position;
     this->initial_cell = this->board->cells[initial_position];
+    this->legal_moves.clear();
     
     for(int i: this->allowed_directions){
         // Traversing in all the allowed directions
@@ -16,27 +16,27 @@ string Piece::FindAllAllowedCells(string initial_position){
         this->current_cell = this->initial_cell;        // This is to revert to initial position after traversing through a direction
 
         this->Traverse(this->max_distance, i);
-
     }
 
     string allowed_cells;
 
+    // legal_moves is a vector of all the valid moves
     if(this->legal_moves.empty()){
-        allowed_cells = "No legal moves from " + this->initial_cell->name;
+
+        allowed_cells = "\nNo legal moves from " + this->initial_cell->name;
+        allowed_cells += "\n\n";
     }
     else{
         
         for(string cell: this->legal_moves){
 
             allowed_cells += cell + ", ";
-        
         }
-
     }
     
-
-    allowed_cells = "Legal Moves: " + allowed_cells;
-    allowed_cells += "\n";
+    allowed_cells = "\nLegal Moves: " + allowed_cells;
+    allowed_cells = allowed_cells.substr(0, allowed_cells.size() - 2);  // Removing the extra , and space from the end
+    allowed_cells += "\n\n";
     
     return allowed_cells;
 }
@@ -58,9 +58,7 @@ void Piece::Traverse(int allowed_distance, int direction){
             this->Traverse(allowed_distance, direction);
 
         }
-        
     }    
-
 }
 
 King::King(Board *board){
@@ -72,7 +70,6 @@ King::King(Board *board){
         // All directions are allowed
         this->allowed_directions.push_back(i);
     }
-
 }
 
 Queen::Queen(Board *board){
@@ -84,7 +81,6 @@ Queen::Queen(Board *board){
         // All directions are allowed
         this->allowed_directions.push_back(i);
     }
-
 }
 
 Pawn::Pawn(Board *board){

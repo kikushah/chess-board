@@ -22,6 +22,14 @@ piece hashit(string const& input){
     
 }
 
+bool ValidateInitialPosition(string initial_position){
+    char x = initial_position.at(0);
+    char y = initial_position.at(1);
+    if(x >= 'A' && x <= 'H' && y >= '1' && y <= '8')
+        return true;
+    else
+        return false;
+}
 
 int main(int argc, char **argv){
     
@@ -43,6 +51,23 @@ int main(int argc, char **argv){
         cout << "Enter an input in this format \"Pawn, G1\". You may press Ctrl + C to exit" << endl;
 
         cin >> piece >> initial_position;
+
+        //Clean the input
+        piece.erase(remove(piece.begin(), piece.end(), ','), piece.end());
+        initial_position.erase(remove(initial_position.begin(), initial_position.end(), ','), initial_position.end());
+
+        try{
+
+            if(!ValidateInitialPosition(initial_position)){
+                cout << "Invalid Initial Position, Try Again !!" << endl;
+                continue;
+
+            }
+        }
+        catch(...){
+                cout << "Invalid Input Format, Try Again !!" << endl;
+                continue;
+        }
 
         switch(hashit(piece)){
             

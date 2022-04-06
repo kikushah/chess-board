@@ -29,7 +29,7 @@ namespace ChessBoard{
             
             string FindAllAllowedCells(string initial_position);
             void Traverse(int allowed_distance, int direction);
-
+            
     };
 
     class King : public Piece{
